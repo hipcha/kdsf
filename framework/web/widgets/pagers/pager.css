@@ -1,0 +1,96 @@
+/**
+ * CSS styles for CLinkPager.
+ *
+ * @author Qiang Xue <qiang.xue@gmail.com>
+ * @link http://www.yiiframework.com/
+ * @copyright 2008-2010 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ * @since 1.0
+ */
+
+ul.yiiPager
+{
+	font-size:15px;
+	border:0;
+	margin:0;
+	padding:0;
+	line-height:100%;
+	 vertical-align:middle;
+	display:inline;
+}
+
+ul.yiiPager li
+{
+	display:inline;
+	 vertical-align:middle;
+	
+}
+
+ul.yiiPager a:link
+{
+	border:solid 1px #CCC;
+	background: #eee url(../images/sub/ico_paging_prev.gif) 50% 50% no-repeat;
+	color:#0e509e;
+	width: 31px;
+    height: 32px;
+	vertical-align:middle;
+    padding: 0;
+	inline-height: 15px;
+	text-decoration:none;
+}
+ul.yiiPager a:visited
+{
+	border:solid 1px #CCC;
+	background: #eee url(../images/sub/ico_paging_prev.gif) 50% 50% no-repeat;
+	color:#545454;
+	width: 31px;
+    height: 32px;
+	 vertical-align:middle;
+    padding: 0;
+
+	text-decoration:none;
+}
+
+ul.yiiPager .page a
+{
+	
+	 vertical-align:middle;
+	color:#545454;
+	font-weight:bold;
+}
+
+ul.yiiPager a:hover
+{
+	border:solid 1px #545454;
+	 vertical-align:middle;
+	font-weight:bold;
+}
+
+ul.yiiPager .selected a
+{
+	border: 1px solid #ff7000;
+	background:#FFFFFF;
+	color:#545454;
+	 vertical-align:middle;
+	font-weight:bold;
+}
+
+ul.yiiPager .hidden a
+{
+	background: #eee url(../images/sub/ico_paging_prev.gif) 50% 50% no-repeat;
+	 vertical-align:middle;
+	font-weight:bold;
+  width: 31px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #ccc;
+}
+
+/**
+ * Hide first and last buttons by default.
+ */
+ul.yiiPager .first,
+ul.yiiPager .last
+{
+	display:none;
+}
