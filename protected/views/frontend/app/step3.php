@@ -509,6 +509,7 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
             <td height="30" align="center" bgcolor="#CCCCCC">
             	<input type="button" name="button7" id="button7" value="SAVE" onclick="saveStep3();" />
               	<input type="button" name="button8" id="button8" value="GO BACK" onclick="window.location.href='/y/app/step2';" />
+              	<input type="button" name="button7" id="button7" value="SUBMIT" onclick="appSubmit();" />
             </td>
           </tr>
         </table></td>
