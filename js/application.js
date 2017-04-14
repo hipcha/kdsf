@@ -69,7 +69,7 @@ function checkEmail(){
 }
 
 function saveStep1(){
-	if(checkValidation()==true){
+	if(checkStep1()==true){
 		blockui_open();
 		
 		$.post('/y/app/saveStep1', $('#appForm').serialize(), function(res){
@@ -85,7 +85,7 @@ function saveStep1(){
 	}
 }
 
-function checkValidation(){
+function checkStep1(){
 	$('.cls_err_msg').hide();
 	$('#err__email').css('color', 'red');
 	
@@ -259,20 +259,13 @@ function saveStep2(mem_ctg){
 }
 
 function saveStep3(){
-	var mem_level = $("input:radio[name=app[mem_level]]:checked").val();
-	if(mem_level==undefined || mem_level=="" || mem_level==1){
-		$('#err__mem_level').show();
-		$('#err__mem_level').html("Please choose an academic level.");
-		$('#level_f').focus();
+	if(checkStep3()==true){	
+		blockui_open();
 		
-		return false;
+		var f = document.appForm;
+		f.action = "/y/app/saveStep3";
+		f.submit();
 	}
-	
-	blockui_open();
-	
-	var f = document.appForm;
-	f.action = "/y/app/saveStep3";
-	f.submit();
 }
 
 function checkDisability(val){
@@ -282,5 +275,68 @@ function checkDisability(val){
 	}
 	else{
 		$('#id_disability_detail').fadeOut('slow');
+	}
+}
+
+function checkStep3(){
+	$('.cls_err_msg').hide();
+	
+	var mem_level = $("input:radio[name=app[mem_level]]:checked").val();
+	if(mem_level==undefined || mem_level=="" || mem_level==1){
+		$('#err__mem_level').show();
+		$('#err__mem_level').html("Please choose an academic level.");
+		$('#level_f').focus();
+		
+		return false;
+	}
+
+	if($('#high_nm').val()==""){
+		$('#err__high_nm').show();
+		$('#err__high_nm').html("You can't leave this empty.");
+		$('#high_nm').focus();
+		
+		return false;
+	}
+
+	if($('#univ_nm').val()==""){
+		$('#err__univ_nm').show();
+		$('#err__univ_nm').html("You can't leave this empty.");
+		$('#univ_nm').focus();
+		
+		return false;
+	}
+
+	if($('#gpa').val()=="" || $('#gpa_total').val()==""){
+		$('#err__gpa').show();
+		$('#err__gpa').html("You can't leave this empty.");
+		$('#gpa').focus();
+		
+		return false;
+	}
+
+	if($('#income').val()==""){
+		$('#err__income').show();
+		$('#err__income').html("You can't leave this empty.");
+		$('#income').focus();
+		
+		return false;
+	}
+
+	if($('.family_name').filter(function(){ return !this.value.trim(); }).length){
+		$('#err__family').show();
+		$('#err__family').html("You can't leave this empty.");
+		scrollToTarget('td_family');
+		
+		//return false;
+	}
+	
+	return true;
+}
+
+function appSubmit(){
+	if(checkStep3()==true){
+		if(confirm("If you submit this application, you can't modify anymore.\rAre you sure you want to submit?")){
+			
+		}
 	}
 }

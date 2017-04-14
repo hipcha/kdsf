@@ -93,7 +93,7 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
             <td height="30" colspan="2" align="left" bgcolor="#CCCCCC"><strong><img src="/y/images/app/blank.png" width="20" height="10" />ACADEMIC LEVEL</strong></td>
           </tr>
           <tr>
-            <td width="172" align="left" bgcolor="#E9E9E9">Academic Level<span class="red"></span></td>
+            <td width="175" align="left" bgcolor="#E9E9E9">Academic Level <span class="red">*</span></td>
             <td width="599"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td><input type="radio" name="app[mem_level]" id="level_f" value="F" <?php if($memInfo[mem_level]=="F" ){?>checked<?php }?> /> F : To be college freshmen</td>
@@ -108,28 +108,34 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
           <tr>
             <td colspan="2" align="center"><table width="92%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="118" height="30"><img src="/y/images/app/ball.png" width="6" height="6" align="baseline" /> High School</td>
-                <td><label for="textfield"></label>
-                  <input name="app[high_nm]" type="text" id="high_nm" size="60" value="<?=$memInfo[high_nm]?>" /></td>
+                <td width="118" height="30"><img src="/y/images/app/ball.png" width="6" height="6" align="baseline" /> High School <span class="red">*</span></td>
+                <td>
+                	<input name="app[high_nm]" type="text" id="high_nm" size="50" value="<?=$memInfo[high_nm]?>" />
+                	<span class="cls_err_msg" id="err__high_nm" style="padding-left:10px;color:red;"></span>
+                </td>
               </tr>
               <tr>
-                <td width="118" height="30"><img src="/y/images/app/ball.png" width="6" height="6" align="baseline" /> College/University</td>
-                <td><input name="app[univ_nm]" type="text" id="univ_nm" size="60" value="<?=$memInfo[univ_nm]?>" /></td>
+                <td width="118" height="30"><img src="/y/images/app/ball.png" width="6" height="6" align="baseline" /> College/University <span class="red">*</span></td>
+                <td>
+                	<input name="app[univ_nm]" type="text" id="univ_nm" size="50" value="<?=$memInfo[univ_nm]?>" />
+                	<span class="cls_err_msg" id="err__univ_nm" style="padding-left:10px;color:red;"></span>
+                </td>
               </tr>
             </table></td>
             </tr>
           <tr>
-            <td width="172" align="left" bgcolor="#E9E9E9">Transcript from Current School</td>
-            <td>GPA
-              <label for="textfield3"></label>
-              <input name="app[gpa]" type="text" id="gpa" size="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'');" value="<?=$memInfo[gpa]?>" /> 
-              / 
-            	<select name="app[gpa]" id="gpa_total">
+            <td width="175" align="left" bgcolor="#E9E9E9">Transcript from Current School <span class="red">*</span></td>
+            <td>
+            	GPA
+              	<input type="text" name="app[gpa]" id="gpa" size="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'');" value="<?=$memInfo[gpa]?>" /> 
+              	/ 
+            	<select name="app[gpa_total]" id="gpa_total">
               		<option value="">Select GPA Scales</option>
               		<option value="4.0" <?php if($memInfo[gpa_total]=="4.0"){?>selected<?php }?>>4.0</option>
               		<option value="4.5" <?php if($memInfo[gpa_total]=="4.5"){?>selected<?php }?>>4.5</option>
               		<option value="5.0" <?php if($memInfo[gpa_total]=="5.0"){?>selected<?php }?>>5.0</option>
             	</select>
+            	<span class="cls_err_msg" id="err__gpa" style="padding-left:10px;color:red;"></span>
             </td>
             </tr>
         </table></td>
@@ -143,13 +149,14 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
             <td height="30" colspan="2" align="left" bgcolor="#CCCCCC"><strong><img src="/y/images/app/blank.png" width="20" height="10" />FINANCIAL STATEMENT</strong></td>
           </tr>
           <tr>
-            <td width="172" align="left" bgcolor="#E9E9E9">Total Family Income<span class="red"></span></td>
+            <td width="172" align="left" bgcolor="#E9E9E9">Total Family Income <span class="red">*</span></td>
             <td width="599">$
               <input name="app[income]" type="text" id="income" size="15" value="<?=$memInfo[income]?>" />.00
+              <span class="cls_err_msg" id="err__income" style="padding-left:10px;color:red;"></span>
 			</td>
           </tr>
           <tr>
-            <td align="left" bgcolor="#E9E9E9">Family Information</td>
+            <td align="left" bgcolor="#E9E9E9">Family Information <span class="red">*</span><br/>(At least one information)</td>
             <td align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <!-- 
               <tr>
@@ -165,20 +172,20 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
               </tr>
             -->
 	          <tr>
-	            <td>
+	            <td id="td_family">
 	            <?php for($i=0 ; $i<5 ; $i++){?>
 	            	<div style="padding-top:20px;<?php if($i==4){?>padding-bottom:20px;<?php }?>">
-		            	<input name="family_name[]" type="text" size="10" value="<?=$familyList[$i][family_name]?>" placeholder="Name" />&nbsp;
-		            	<input name="family_relationship[]" type="text" size="10" value="<?=$familyList[$i][family_relationship]?>" placeholder="Relationship" />&nbsp;
-		            	<input name="family_age[]" type="text" size="10" value="<?=$familyList[$i][family_age]?>" placeholder="Age" />&nbsp;
-		            	<input name="family_occupation[]" type="text" size="10" value="<?=$familyList[$i][family_occupation]?>" placeholder="Occupation" />&nbsp;
-		            	<input name="family_remark[]" type="text" size="18" value="<?=$familyList[$i][family_remark]?>" placeholder="Remark" />
-		            	<select name="family_together[]">
+		            	<input class="family_name" name="family_name[]" type="text" size="10" value="<?=$familyList[$i][family_name]?>" placeholder="Name" />&nbsp;
+		            	<input class="family_relationship" name="family_relationship[]" type="text" size="10" value="<?=$familyList[$i][family_relationship]?>" placeholder="Relationship" />&nbsp;
+		            	<input class="family_age" name="family_age[]" type="text" size="10" value="<?=$familyList[$i][family_age]?>" placeholder="Age" />&nbsp;
+		            	<input class="family_occupation" name="family_occupation[]" type="text" size="10" value="<?=$familyList[$i][family_occupation]?>" placeholder="Occupation" />&nbsp;
+		            	<input class="family_remark" name="family_remark[]" type="text" size="18" value="<?=$familyList[$i][family_remark]?>" placeholder="Remark" />
+		            	<select class="family_together" name="family_together[]">
 		              		<option value="">==Living Together==</option>
 		              		<option value="Y" <?php if($familyList[$i][family_together]=="Y"){?>selected<?php }?>>Yes</option>
 		              		<option value="N" <?php if($familyList[$i][family_together]=="N"){?>selected<?php }?>>No</option>
 		            	</select>&nbsp;
-		            	<select name="family_marital[]">
+		            	<select class="family_marital" name="family_marital[]">
 		              		<option value="">==Marital Status==</option>
 		              		<option value="M" <?php if($familyList[$i][family_marital]=="M"){?>selected<?php }?>>Married</option>
 		              		<option value="S" <?php if($familyList[$i][family_marital]=="S"){?>selected<?php }?>>Single</option>
@@ -187,6 +194,7 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
 		            	</select>&nbsp;
 		            </div>
 		        <?php }?>
+		        	<span class="cls_err_msg" id="err__family" style="padding-left:10px;color:red;"></span>
 	            </td>
 	          </tr>
             </table></td>
@@ -322,19 +330,6 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
             <td height="30" align="center" bgcolor="#E9E9E9">
             	<label for="textfield11"></label>
               	<textarea name="app[essay]" cols="90" rows="6" id="essay"><?=$memInfo[essay]?></textarea>
-            </td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td align="center"><table width="80%" border="0" cellpadding="5" cellspacing="3" class="text">
-          <tr>
-            <td width="771" height="30" align="left" bgcolor="#CCCCCC"><strong><img src="/y/images/app/blank.png" width="20" height="10" />APPLICANT'S COMMENT</strong></td>
-          </tr>
-          <tr>
-            <td height="30" align="center" bgcolor="#E9E9E9">
-            	<label for="textfield11"></label>
-              	<textarea name="app[comment]" cols="90" rows="6" id="comment"><?=$memInfo[comment]?></textarea>
             </td>
           </tr>
         </table></td>
@@ -509,7 +504,7 @@ $is_modify = $memInfo[mem_id]=="" ? "N" : "Y";
             <td height="30" align="center" bgcolor="#CCCCCC">
             	<input type="button" name="button7" id="button7" value="SAVE" onclick="saveStep3();" />
               	<input type="button" name="button8" id="button8" value="GO BACK" onclick="window.location.href='/y/app/step2';" />
-              	<input type="button" name="button7" id="button7" value="SUBMIT1" onclick="appSubmit();" />
+              	&nbsp;&nbsp;<input type="button" name="button7" id="button7" value="SUBMIT" onclick="appSubmit();" style="font-weight:bold;color:red;" />
             </td>
           </tr>
         </table></td>
